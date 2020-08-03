@@ -1,3 +1,14 @@
+/* Template strings
+`corpo de texto`
+
+`texto linha 1
+ texto linha 2`
+
+`texto string ${expression} texto string`
+
+tag `texto string ${expression} texto string`
+*/
+
 //tipos de função
 
 //função vanilla
@@ -495,3 +506,298 @@ console.log(email.test("giovani.lima@everthefullstack.com.br"));
 const dataNasc = /[0-9]{2}[/][0-9]{2}[/][0-9]{4}/
 console.log(dataNasc.test("07/07/1991"));
 console.log(dataNasc.test("07/07/91"));
+
+//programação assincrona
+//ações podem ser feitas em qualqur tempo sem uma "fila"
+
+//callbacks executa uma função após algum acontecimento no codigo
+console.log(1);
+setTimeout(function() {
+    console.log(9);
+}, 2000);
+
+//promises são funções assíncronas que podem produzir um valor em algum momento no código
+let p = Promise.resolve(5);
+console.log("outros codigos");
+console.log(p);
+p.then((value) => {console.log(`o valor é ${value}`)});
+
+//falha nas promises
+let pp = Promise.resolve(new Error("Não deu certa a promisse"));
+console.log("Não serve pra nada");
+pp.then(value => console.log(value))
+    .catch(reason => console.log("falhou: " + reason));
+
+//rejeitando promises
+function verificaNumero(num){
+    return new Promise((resolve, reject) => {
+        if(num == 2){
+            resolve(console.log(`o numero e ${num} nessa promisse`));
+        } else {
+            reject(new Error("Falhou"));
+        }
+    });
+}
+verificaNumero(2);
+verificaNumero(3);
+
+//resolvendo varias promises
+const p1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve(10);
+    }, 5000);
+});
+const p2 = Promise.resolve(11);
+const p3 = new Promise((resolve, reject) => {
+    resolve(12);
+});
+Promise.all([p1, p2, p3]).then((values) => console.log(values));
+
+//async functions retorna uma promise
+//se der exito a promise é resolvida
+//se der erro, a promise é rejeitada
+async function soma(a, b){
+    return a + b;
+}
+soma(2, 4).then(value => console.log(value));
+console.log(soma(2, 8));
+
+const somaAsync = async (a, b) => {
+    return a + b;
+}
+somaAsync(10, 20).then(value => console.log(value));
+console.log(somaAsync(20,30));
+
+//await espera uma promise ser resolvida para apresentar um resultado
+const somaComDelay = (a,b) => {
+    return new Promise(resolve => {
+        setTimeout( () => {
+            resolve(a + b);
+        }, 4000);
+    })
+};
+const resSoma = async (a, b, c) => {
+    let x = somaComDelay(a,b);
+    let y = c;
+
+    return await x + y;
+}
+resSoma(100, 200, 300).then(value => console.log(value));
+
+//generators são semelhantes as promises, os valores podem ser salvos na "memória"
+//ações podem ser pausadas e continuadas depois
+//caracterizados pelo function* e yeld
+//yeld pode salvar o estado da variável
+function* criadorId(){
+    let id = 0;
+    while(true){
+        yield id++;
+    }
+}
+let criarid = criadorId();
+console.log(criarid.next().value);
+console.log(criarid.next().value);
+console.log(criarid.next().value);
+
+//javascript e o navegador
+console.log(document.body);
+console.log(document.body.childNodes);
+
+//javascript e o navegador
+console.log(document.body);
+console.log(document.body.childNodes);
+
+//encontrando elementos pela tag
+console.log(document.getElementsByTagName("h1"));
+console.log(document.getElementsByTagName("p"));
+
+//encontrando elementos pelo ID
+console.log(document.getElementById("par1"));
+
+//encontrando elementos pela classe
+console.log(document.getElementsByClassName("lista"));
+
+//encontrando elementos por query
+console.log(document.querySelector("#div1 h1"));
+console.log(document.querySelector("#div1 div p"));
+
+//Alterando o DOM com insertBefore
+let novoElemento = document.createElement("p");
+let texto = document.createTextNode("Texto do novo paragrafo1");
+novoElemento.appendChild(texto);
+let elementoAlvo = document.querySelector("#titulo-principal");
+let elementoPai = document.querySelector("#div1");
+elementoPai.insertBefore(novoElemento, elementoAlvo);
+
+//Alterando o DOM com appendChild
+let novoElemento2 = document.createElement("p");
+let texto2 = document.createTextNode("Texto do novo paragrafo2");
+novoElemento2.appendChild(texto2);
+let p = document.querySelector("#paragrafo-principal");
+let pai1 = p.parentNode;
+pai1.appendChild(novoElemento2);
+
+//Alterando o DOM com replaceChild
+let novoElemento3 = document.createElement("p");
+let texto3 = document.createTextNode("Texto do novo paragrafo3");
+novoElemento3.appendChild(texto3);
+let h1 = document.querySelector("#titulo-principal");
+let pai2 = h1.parentNode;
+pai2.replaceChild(novoElemento3, h1);
+
+//criando nós de texto
+let parSemTexto = document.getElementById("sem-texto");
+let texto4 = document.createTextNode("texto para o paragrafo4");
+parSemTexto.appendChild(texto4);
+
+//criando nós de elemento
+let lista = document.createElement("ul");
+for(let i = 0; i < 5; i++){
+    let item = document.createElement("li");
+    let texto5 = document.createTextNode(`Texto da lista ${i}`);
+    item.appendChild(texto5);
+    lista.appendChild(item);
+}
+let container = document.getElementById("div1");
+container.appendChild(lista);
+
+//modificando e lendo atributos
+let a = document.querySelector("footer a");
+let link = "https://www.youtube.com";
+a.setAttribute("href", link);
+a.setAttribute("target", "_blank");
+
+//verificando altura e largura do elemento
+let elemento = document.querySelector("#div1");
+console.log(elemento.offsetWidth);
+console.log(elemento.offsetHeight);
+console.log(elemento.clientWidth);
+console.log(elemento.clientHeight);
+
+//posição dos elementos
+console.log(elemento.getBoundingClientRect());
+
+//estilizando o CSS com JS
+elemento.style.color = "red";
+
+//selecionando varios elementos com query
+let varios = document.querySelectorAll("div");
+console.log(varios);
+
+//eventos JS são ações condicionadas a algum tipo de resposta feita pelo usuário
+//ex: clicks, movimento do mouse, entre outros
+//como adicionar um evento
+let btn = document.querySelector("button");
+btn.addEventListener("click", () => {
+    console.log("Clicou no botão");
+});
+
+//eventos JS são ações condicionadas a algum tipo de resposta feita pelo usuário
+//ex: clicks, movimento do mouse, entre outros
+
+//como adicionar um evento
+let btn1 = document.querySelector("#btn1");
+let btn2 = document.querySelector("#btn2");
+const msg = () =>{
+    console.log("Clicou no botão");
+}
+btn1.addEventListener("click", msg)
+
+//removendo eventos
+btn2.addEventListener("click", () => {
+    btn1.removeEventListener("click", msg);
+});
+
+//o objeto evento para exibir informações sobre o evento
+btn2.addEventListener("click", (e) => {
+    btn1.removeEventListener("click", msg);
+    console.log(e);
+});
+
+//propagação - ocorre quando não definimos muito bem um seletor
+//um elemento pode ativar outro evento
+//para contornar isso, utiliza o stopPropagation
+const msg = (e) =>{
+    console.log("Clicou no botão");
+    e.stopPropagation();
+}
+p = document.getElementById("p-btn");
+p.addEventListener("click", () =>{
+    console.log("clicou no botão do paragrafo");
+});
+
+//prevent default é para não fazer oq seria feito automaticamente
+//e fazer algo que o desenvolvedor queira
+let a = document.querySelector("a");
+a.addEventListener("click", (e) => {
+    e.preventDefault();
+    console.log("Não vai ir para o site");
+});
+
+//eventos nas teclas
+window.addEventListener("keydown", (e) => {
+    if(e.key == "q"){
+        console.log("apertou a tecla Q");
+    } else if(e.key == "Enter"){
+        console.log("Apertou a tecla ENTER");
+    }
+});
+window.addEventListener("keyup", (e) => {
+    if(e.key == "q"){
+        console.log("soltou a tecla Q");
+    } else if(e.key == "Enter"){
+        console.log("Soltou a tecla ENTER");
+    }
+});
+
+//eventos do mouse
+btn1 = document.querySelector("#btn1");
+btn1.addEventListener("mousedown", () => {
+    console.log("Apertou o botão do mouse");
+});
+btn1.addEventListener("mouseup", () => {
+    console.log("Soltou o botão do mouse");
+});
+btn1.addEventListener("dblclick", () => {
+    console.log("Fez double click");
+});
+
+//movimento do mouse
+window.addEventListener("mousemove", (e) => {
+    console.log(e.x, e.y);
+});
+
+//evento por scroll
+window.addEventListener("scroll", (e) => {
+    if(window.pageYOffset > 1000){
+        console.log("ativou a função do scroll");
+    }
+});
+
+//eventos por foco quando entramos ou saimos de um elemento
+let input = document.querySelector("input");
+input.addEventListener("focus", () => {
+    console.log("entrou no input");
+});
+input.addEventListener("blur", () => {
+    console.log("Saiu do input");
+});
+
+//evento de carregamento
+window.addEventListener("load", () => {
+    alert("Carregando o alert ao carregar a página");
+});
+window.addEventListener("beforeunload", () => {
+    event.returnValue = null;
+});
+
+//debounce evita que um evento seja chamadovarias vezes
+//fazendo com que tenha uma pausa
+//movimento do mouse
+let timeout;
+window.addEventListener("mousemove", (e) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+        console.log(e.x, e.y);
+    }, 500);
+});
