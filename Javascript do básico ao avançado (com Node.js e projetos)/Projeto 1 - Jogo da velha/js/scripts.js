@@ -236,6 +236,7 @@ function declaraVencedor(winner){
 
 //executa a jogada da IA
 function jogadaIa(){
+
     let cloneO = o.cloneNode(true);
     counter = 0;
     filled = 0;
@@ -253,8 +254,8 @@ function jogadaIa(){
                 filled++;
             }
         }
-    }
+    }/*
     if(counter == 0 && filled < 9){
         jogadaIa();
-    }
+    }*/
 }
