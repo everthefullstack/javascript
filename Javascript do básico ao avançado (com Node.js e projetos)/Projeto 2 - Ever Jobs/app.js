@@ -1,20 +1,18 @@
 const express = require('express');
 const app = express();
-const connection = require('./db/connection');
-const jobs = require('./db/jobs');
+const db = require('./src/db/job');
+const bodyParser = require('body-parser')
 
+//configurações
+app.use(bodyParser.urlencoded({ extended:true }));
+app.use(bodyParser.json());
+
+//rotas
+app.use('/job', require('./src/controllers/job'));
+
+//inicia o servidor
 app.listen(3000, function(){
-    console.log("O express está rodando")
+    console.log("O express está rodando na porta 3000!")
+    //cria tabelas do banco
+    db.sync();
 });
-
-app.get('/',(req, res) => {
-    res.send("está funcionando muito bem");
-});
-
-connection.authenticate().then(() => {
-    console.log("Conectado ao banco de dados");
-}).catch(err => {
-    console.log("Erro ao conectar ao banco de dados", err);
-});
-
-jobs.sync();

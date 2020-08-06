@@ -1,21 +1,15 @@
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('./connection');
 
-class Jobs extends Model{}
-Jobs.init({
-    pkcodjob: {
-        type: DataTypes.INTEGER,
-        field: 'pkcodjob',
-        primaryKey: true,
-        autoIncrement: true
-    },
+class Job extends Model{}
+Job.init({
     nome: {
         type: DataTypes.STRING(50),
         field: 'nome'
     },
-    titulo:{
+    descricao:{
         type: DataTypes.STRING(50),
-        field: 'titulo'
+        field: 'descricao'
     },
     salario: {
         type: DataTypes.NUMBER,
@@ -35,7 +29,7 @@ Jobs.init({
     }
 },{
     // Other model options go here
-    sequelize, // We need to pass the connection instance
-    modelName: 'Jobs' // We need to choose the model name
+    sequelize // We need to pass the connection instance
 });
-module.exports = Jobs;
+
+module.exports = Job;
