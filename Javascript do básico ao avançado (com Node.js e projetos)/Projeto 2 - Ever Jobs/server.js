@@ -4,13 +4,15 @@ const app           = express();
 const path          = require('path');
 const db            = require('./src/db/job');
 const bodyParser    = require('body-parser')
-const PORT = 3000;
+
+//cria o banco
+db.sync();
 
 //inicia o servidor
-app.listen(PORT, function() {
-    console.log(`O Express está rodando na porta ${PORT}`);
-    //cria tabelas do banco
-    db.sync();
+const server = app.listen(process.env.PORT || 8000, () => {
+    const host = server.address().address;
+    const port = server.address().port;
+    console.log(`O Express está rodando no http://${host}:${port}`);
 });
 
 //configurações
@@ -28,3 +30,6 @@ app.use(express.static(path.join(__dirname, '/src/public')));
 //rotas
 app.use('/job', require('./src/controllers/job'));
 app.use('/', require('./src/controllers/index'));
+
+//gcloud app deploy
+//gcloud app browse
