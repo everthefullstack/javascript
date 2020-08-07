@@ -2,7 +2,19 @@ const express = require('express');
 const router = express.Router()
 const Job = require('../models/job');
 
-router.post('/add', (req,res) => {
+router.get('/add', (req, res) => {
+    res.render('add');
+});
+
+router.get('/view/:id', (req, res) => Job.findOne({
+    where: {id: req.params.id}
+    }).then(job => {
+  
+        res.render('view', {job});
+
+}).catch(err => console.log(err)));
+
+router.post('/add', (req, res) => {
 
     let {nome,
         descricao,
@@ -19,7 +31,7 @@ router.post('/add', (req,res) => {
         companhia,
         email,
         vagaNova
-    }).then(() => res.send('200'))
+    }).then(() => res.redirect('/'))
     .catch(err => console.log(err));
 });
 
