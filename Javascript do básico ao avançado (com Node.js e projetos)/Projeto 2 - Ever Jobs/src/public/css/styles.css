@@ -239,7 +239,56 @@
 
 /* responsivo */
 
-@media (max-width: 481px) {
+@media (max-width: 365px) {
+
+  #job {
+    font-size: 10px;
+    text-align: center;
+  }
+  #search-form > div.col-md-2 > button{
+    font-size: 13px;
+    text-align: center;
+  }
+  #job-list h2{
+    position: relative;
+    bottom: 12px;
+    font-size: 15px;
+  }
+  #job-list a{
+    border-radius: 10%;
+    font-size: 10px;
+  }
+  #job-list li p{
+    position: relative;
+    bottom: 10px;
+  }
+}
+@media (max-width: 412px) {
+
+  #job {
+    font-size: 15px;
+    text-align: center;
+  }
+  #search-form > div.col-md-2 > button{
+    font-size: 18px;
+    text-align: center;
+  }
+  #job-list h2{
+    position: relative;
+    bottom: 12px;
+    font-size: 15px;
+  }
+  #job-list a{
+    border-radius: 10%;
+    font-size: 10px;
+  }
+  #job-list li p{
+    position: relative;
+    bottom: 10px;
+  }
+}
+
+@media (max-width: 598px) {
 
   /* navbar */
   #navbarNav {
