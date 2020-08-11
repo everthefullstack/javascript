@@ -1,7 +1,7 @@
 const sequelize = require('../database/connection');
 const Sequelize = require('sequelize');
 
-const Job = sequelize.define(
+const job = sequelize.define(
     'job',{
         id:{
             field: 'pkcodjob',
@@ -38,4 +38,4 @@ const Job = sequelize.define(
     }
 );
 
-module.exports = Job;
+module.exports = job;

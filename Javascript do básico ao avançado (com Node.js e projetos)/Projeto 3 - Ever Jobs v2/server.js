@@ -1,7 +1,7 @@
 const express           = require('express');
 const app               = express();
 const router            = require('./router/routes');
-const createDb          = require('./database/create');
+const createDb          = require('./database/createDb');
 
 app.use(express.json());
 //app.use(createDb);
