@@ -1,10 +1,11 @@
-const jobModel          = require('../models/job');
-const express           = require('express');
-const router            = express.Router();
+const vagaModel          = require('../models/vaga');
+const candidatoModel     = require('../models/candidato');
+const enderecoModel      = require('../models/endereco');
 
 const createDb = function(){
-    jobModel.sync();
-    router.redirect(200, '../router/routes');
+    vagaModel.sync();
+    candidatoModel.sync();
+    enderecoModel.sync();
 }
 
 module.exports = createDb;

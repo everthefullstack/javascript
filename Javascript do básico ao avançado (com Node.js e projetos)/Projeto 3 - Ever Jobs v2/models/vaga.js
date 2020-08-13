@@ -1,41 +1,45 @@
 const sequelize = require('../database/connection');
 const Sequelize = require('sequelize');
 
-const job = sequelize.define(
-    'job',{
-        id:{
-            field: 'pkcodjob',
+const Vaga = sequelize.define(
+    'vaga',{
+        pkcodjob:{
             type: Sequelize.INTEGER,
+            field: 'pkcodvaga',
             primaryKey: true
         },
-        nome: {
+        nomevaga: {
             type: Sequelize.STRING(50),
-            field: 'nome'
+            field: 'nomevaga'
         },
-        descricao:{
+        empresa: {
             type: Sequelize.STRING(50),
-            field: 'descricao'
+            field: 'empresa'
+        },
+        descricaovaga:{
+            type: Sequelize.STRING(50),
+            field: 'descricaovaga'
         },
         salario: {
             type: Sequelize.NUMBER,
             field: 'salario'
         },
-        companhia: {
-            type: Sequelize.STRING(50),
-            field: 'companhia'
-        },
         email: {
             type: Sequelize.STRING(50),
             field: 'email'
         },
-        vagaNova: {
+        telefone: {
+            type: Sequelize.STRING(11),
+            field: 'telefone'
+        },
+        vaganova: {
             type: Sequelize.BOOLEAN,
-            field: 'vagaNova'
+            field: 'vaganova'
         }
     }, 
     {
-        timestamps: false
+        timestamps: true
     }
 );
 
-module.exports = job;
+module.exports = Vaga;

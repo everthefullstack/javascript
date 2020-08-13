@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 
-module.exports  = new Sequelize({
+module.exports = new Sequelize({
     dialect:'sqlite',
-    storage: 'database/job.db'
+    storage: 'database/app.db'
 });
 /*
 module.exports = new Sequelize("app_db", "root", "ulbra@@2020!!", {
