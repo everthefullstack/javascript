@@ -1,9 +1,9 @@
-const express           = require('express');
-const router            = express.Router();
-const controllerVaga     = require('../controller/vaga');
-const controllerCandidato     = require('../controller/candidato');
-const controllerEndereco     = require('../controller/endereco');
-const controllerIndex     = require('../controller/index');
+const express = require('express');
+const router = express.Router();
+const controllerVaga = require('../controller/vaga');
+const controllerCandidato = require('../controller/candidato');
+const controllerEndereco = require('../controller/endereco');
+const controllerIndex = require('../controller/index');
 
 //rotas para o controller index
 router.get('/', controllerIndex.get);
