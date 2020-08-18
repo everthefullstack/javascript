@@ -2,7 +2,7 @@ const sequelize = require('../database/connection');
 const Sequelize = require('sequelize');
 
 const Endereco = sequelize.define(
-    'endereco',{
+    'tbendereco',{
         pkcodend:{
             type: Sequelize.INTEGER,
             field: 'pkcodend',
@@ -34,7 +34,8 @@ const Endereco = sequelize.define(
         }
     }, 
     {
-        timestamps: true
+        timestamps: true,
+        freezeTableName: true
     }
 );
 
