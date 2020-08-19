@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 
 const Curso = sequelize.define(
     'tbcurso',{
-        pkcodform:{
+        pkcodcurso:{
             type: Sequelize.INTEGER,
             field: 'pkcodcurso',
             primaryKey: true

@@ -3,12 +3,12 @@ const Sequelize = require('sequelize');
 
 const Vaga = sequelize.define(
     'tbvaga', {
-        pkcodjob: {
+        pkcodvaga: {
             type: Sequelize.INTEGER,
             field: 'pkcodvaga',
             primaryKey: true
         },
-        nomevaga: {
+        nome: {
             type: Sequelize.STRING(50),
             field: 'nome'
         },
@@ -16,7 +16,7 @@ const Vaga = sequelize.define(
             type: Sequelize.STRING(50),
             field: 'empresa'
         },
-        descricaovaga: {
+        descricao: {
             type: Sequelize.STRING(50),
             field: 'descricao'
         },

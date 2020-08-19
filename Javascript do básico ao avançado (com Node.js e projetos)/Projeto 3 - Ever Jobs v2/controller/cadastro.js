@@ -1,4 +1,5 @@
 const Cadastro = require('../models/cadastro');
+const bcrypt = require('bcrypt');
 
 module.exports = {
 
@@ -6,8 +7,31 @@ module.exports = {
         res.status(200).send("Funcionando get cadastro");
     },
     post: (req, res) => {
-        res.status(200).send("Funcionando post cadastro");
+        
+        bcrypt.hash(req.body.senha, 10, (errBcrypt, hash) => {
+            if(errBcrypt){
+                return res.status(500).send("Erro interno no servidor" + errBcrypt)
+            }
+
+            let {
+                nome,
+                datanasc,
+                telefone,
+                email,
+                senha
+            } = req.body;
+    
+            Cadastro.create({
+                nome,
+                datanasc,
+                telefone,
+                email,
+                senha
+            }).then(() => res.status(200).send("Usuario cadastrado"))
+              .catch(err => console.log(err));
+        });  
     },
+
     put: (req, res) => {
         res.status(200).send("Funcionando put cadastro");
     },

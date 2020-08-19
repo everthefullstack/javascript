@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 
 const Emprego = sequelize.define(
     'tbemprego',{
-        pkcodend:{
+        pkcodemp:{
             type: Sequelize.INTEGER,
             field: 'pkcodemp',
             primaryKey: true

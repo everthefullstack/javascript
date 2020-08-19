@@ -1,5 +1,6 @@
 const sequelize = require('../database/connection');
 const Sequelize = require('sequelize');
+const Vaga = require('./vaga');
 const Endereco = require('./endereco');
 const Formacao = require('./formacao');
 const Emprego = require('./emprego');
@@ -7,12 +8,12 @@ const Curso = require('./curso');
 
 const Cadastro = sequelize.define(
     'tbcadastro',{
-        pkcodcand:{
+        pkcodcad:{
             type: Sequelize.INTEGER,
             field: 'pkcodcad',
             primaryKey: true
         },
-        nomecand: {
+        nome: {
             type: Sequelize.STRING(50),
             field: 'nome'
         },
@@ -27,6 +28,10 @@ const Cadastro = sequelize.define(
         email: {
             type: Sequelize.STRING(50),
             field: 'email'
+        },
+        senha: {
+            type: Sequelize.STRING(100),
+            field: 'senha'
         }
     }, 
     {
@@ -35,6 +40,7 @@ const Cadastro = sequelize.define(
     }
 );
 
+Cadastro.hasOne(Vaga, {foreignKey: 'fkcodcad'});
 Cadastro.hasOne(Endereco, {foreignKey: 'fkcodcad'});
 Cadastro.hasOne(Formacao, {foreignKey: 'fkcodcad'});
 Cadastro.hasOne(Emprego, {foreignKey: 'fkcodcad'});
