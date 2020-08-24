@@ -8,7 +8,7 @@ module.exports = {
     },
     post: (req, res) => {
         
-        bcrypt.hash(req.body.senha, 10, (errBcrypt, hash) => {
+        bcrypt.hash(req.body.senha, 10, (errBcrypt, senha) => {
             if(errBcrypt){
                 return res.status(500).send("Erro interno no servidor" + errBcrypt)
             }
@@ -17,10 +17,9 @@ module.exports = {
                 nome,
                 datanasc,
                 telefone,
-                email,
-                senha
+                email
             } = req.body;
-    
+            
             Cadastro.create({
                 nome,
                 datanasc,
@@ -28,7 +27,7 @@ module.exports = {
                 email,
                 senha
             }).then(() => res.status(200).send("Usuario cadastrado"))
-              .catch(err => console.log(err));
+              .catch(err => res.status(500).send("Email já cadastrado na base de dados!"));
         });  
     },
 

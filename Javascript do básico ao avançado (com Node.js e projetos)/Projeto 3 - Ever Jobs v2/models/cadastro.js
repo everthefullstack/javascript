@@ -26,8 +26,9 @@ const Cadastro = sequelize.define(
             field: 'telefone'
         },
         email: {
-            type: Sequelize.STRING(50),
-            field: 'email'
+            type: Sequelize.STRING(100),
+            field: 'email',
+            unique: true
         },
         senha: {
             type: Sequelize.STRING(100),
